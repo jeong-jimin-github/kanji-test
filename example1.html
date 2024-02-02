@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <title>한자 인식기</title>
+  </head>
+  
+  <body>
+    <header>
+      <h1>한자 인식기</h1>
+    </header>
+    
+    <div id="content">
+      <div id="kanji-canvas" class="content-block">
+        <p class="center">한자를 쓰고 "인식" 버튼을 눌러주세요</p>
+        <div class="kanji-canvas-container">
+          <canvas id="can" class="kanji-canvas" data-candidate-list="candidateList" width="256" height="256"></canvas>
+          <div class="kanji-canvas-controls">
+            <button onclick="KanjiCanvas.erase('can')" title="(CTRL+X)">지우기</button>
+            <button onclick="KanjiCanvas.deleteLast('can')" title="(CTRL+Z)">실행 취소</button>
+            <button onclick="KanjiCanvas.recognize('can')" title="(CTRL+F)">인식</button>
+          </div>
+          <div id="candidateList" class="kanji-canvas-candidates"></div>
+        </div>
+      </div>
+
+    <script src="https://asdfjkl.github.io/kanjicanvas/resources/javascript/kanji-canvas.min.js"></script>
+    <script src="https://asdfjkl.github.io/kanjicanvas/resources/javascript/ref-patterns.js"></script>
+    <script>KanjiCanvas.init('can');</script>
+  </body>
+</html>
