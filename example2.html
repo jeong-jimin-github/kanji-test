@@ -1,0 +1,55 @@
+<html>
+  <head>
+    <!-- 웹 페이지의 제목을 설정합니다 -->
+    <title>한자 퀴즈</title>
+  </head>
+  
+  <body>
+    <!-- 웹 페이지의 헤더 부분입니다 -->
+    <header>
+      <h1>한자 퀴즈</h1>
+    </header>
+    
+    <!-- 웹 페이지의 주요 콘텐츠가 위치하는 부분입니다 -->
+    <div id="content">
+      <h2>한자를 쓰세요</h2>
+      <!-- 퀴즈 문제가 표시되는 부분입니다 -->
+      <div id="quiz"><br><h1><ruby>〇<rt>あか</rt></ruby>い</h1><br></div>
+      <!-- 사용자가 한자를 쓸 수 있는 캔버스입니다 -->
+      <canvas id="can" width="256" height="256"></canvas><br><br>
+      <div class="kanji-canvas-controls">
+        <!-- 지우기 버튼입니다 -->
+        <button onclick="KanjiCanvas.erase('can')" title="(CTRL+X)">지우기</button>
+        <!-- 실행 취소 버튼입니다 -->
+        <button onclick="KanjiCanvas.deleteLast('can')" title="(CTRL+Z)">실행 취소</button>
+        <!-- 인식 버튼입니다 -->
+        <button onclick="reco()" title="(CTRL+F)">인식</button>
+      </div>
+      <!-- 퀴즈 결과가 표시되는 부분입니다 -->
+      <p id="text"></p>
+    </div>
+
+    <!-- 한자 인식기에 필요한 자바스크립트 파일들을 불러옵니다 -->
+    <script src="https://asdfjkl.github.io/kanjicanvas/resources/javascript/kanji-canvas.min.js"></script>
+    <script src="https://asdfjkl.github.io/kanjicanvas/resources/javascript/ref-patterns.js"></script>
+    <script>
+      // 한자 인식기를 초기화합니다
+      KanjiCanvas.init('can');
+      // 인식 버튼을 눌렀을 때 실행되는 함수입니다
+      function reco() {
+        // 캔버스에 쓴 한자를 인식합니다
+        KanjiCanvas.recognize('can');
+        // 인식된 한자가 '赤'이면 정답 처리합니다
+        if ('赤' == KanjiCanvas.recognize('can').charAt(0)) {
+          document.getElementById("quiz").innerHTML = "<h1><ruby>赤<rt>あか</rt></ruby>い</h1>";
+          document.getElementById("text").innerHTML = "정답입니다.";
+        }
+        // 인식된 한자가 '赤'이 아니면 오답 처리합니다
+        else {
+          KanjiCanvas.erase('can');
+          document.getElementById("text").innerHTML = "틀렸습니다.";
+        }
+      }
+    </script>
+  </body>
+</html>
